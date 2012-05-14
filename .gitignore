@@ -1,0 +1,2 @@
+# Ignore the output of the C and Pascal compiler.
+bin
