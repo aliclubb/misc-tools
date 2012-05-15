@@ -3,13 +3,13 @@ program ROT13;
 var
 	c:char;
 	t, p:integer;
-	i:array[1..1024] of Integer;
+	i:array[1..1024] of integer;
 
 begin
 	p := 0;
 	repeat
 	p := p + 1;
-	Read(c);
+	read(c);
 	i[p] := ord(c);
 	until i[p] = 10;
 	p := 1;
@@ -25,8 +25,8 @@ begin
 				write(chr(96 + t))
 			else
 				write(chr(64 + t))
-			end
-			else if ((i[p] <> 32) and (i[p] > 60)) then
+		end
+			else if (i[p] <> 32) then
 				write(chr(i[p] + 13))
 			else if (i[p] = 32) then
 				write(chr(i[p]));
