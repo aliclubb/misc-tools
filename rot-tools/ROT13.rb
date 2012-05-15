@@ -21,7 +21,7 @@ begin
   else if c[i] != 32
     putc c[i] + 13
   else
-    putc 13
+    putc 32
   end
   end
   i = i + 1
