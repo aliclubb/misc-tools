@@ -4,7 +4,9 @@
 int main (int argc, char const *argv[])
 {
 	int i, c;
-	if(strcmp(argv[1], "-ascii") == 0)
+	if(argc == 1)
+		printf("Usage: ascii-tools [options]\nOptions:\n-ascii\n-char\n");
+	else if(strcmp(argv[1], "-ascii") == 0)
 	{
 		/* Small character to ASCII number converter */
 		while ((c = getchar()) != EOF)
