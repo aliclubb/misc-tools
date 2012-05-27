@@ -1,8 +1,7 @@
 #include <stdio.h>
 
-int main ()
+int main (c)
 {
-	int c;
 	while ((c = getchar()) != EOF)
 		if(32 < c)
 			if(c < 80)
