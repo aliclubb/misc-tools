@@ -1,30 +1,21 @@
 #include <stdio.h>
+#include <ctype.h>
 
-int main(c, t)
+int main(c)
 {
-	while((c = getchar()) != 10)
-		if((c >= 78 && c < 92) || (c >= 110))
-		{
-			t = 0;
-			for(;(c >= 78 && c < 92) || (c >= 110);--c)
-				++t;
-			if(c > 92)
-				putchar(96 + t);
+	while((c = getchar()) != EOF)
+		if(isalpha(c))
+			if((c < 78) || (96 < c && c < 110))
+				putchar(c + 13);
 			else
-				putchar(64 + t);
-		}
-		else if(c != 32 && c > 60)
-			putchar(c + 13);
-		else if(c == 32)
-			putchar(c);
-		else if(c >= 53)
-		{
-			t = 0;
-			for(;c >= 54;--c)
-				++t;
-			putchar(48 + t);
-		}
+				putchar(c - 13);
 		else
-			putchar(c + 5);
+			if(c < 48)
+				putchar(c);
+			else
+				if((c > 32 && c < 53))
+					putchar(c + 5);
+				else
+					putchar(c - 5);
 	return 0;
 }
