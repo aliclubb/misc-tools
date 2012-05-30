@@ -10,7 +10,7 @@ int main(c)
 			else
 				putchar(c - 13);
 		else
-			if(c < 48)
+			if(c < 48 || c > 58)
 				putchar(c);
 			else
 				if((c > 32 && c < 53))
