@@ -30,7 +30,7 @@ int main (void)
 				y--;
 				move(y, x);
 				wall = inch();
-				if(wall == '=')
+				if(wall == '.')
 				{
 					getyx(stdscr, y, x);
 					y++;
@@ -68,7 +68,7 @@ int main (void)
 				y++;
 				move(y, x);
 				wall = inch();
-				if(wall == '=')
+				if(wall == '.')
 				{
 					getyx(stdscr, y, x);
 					y--;
@@ -86,7 +86,6 @@ int main (void)
 					move(y, x);
 					addch('@');
 					refresh();
-					x++;
 					move(y, x);
 					refresh();
 				}
@@ -104,7 +103,7 @@ int main (void)
 				x--;
 				move(y, x);
 				wall = inch();
-				if(wall == '=')
+				if(wall == '.')
 				{
 					getyx(stdscr, y, x);
 					x++;
@@ -113,7 +112,14 @@ int main (void)
 				}
 				else
 				{
-					mvprintw(y, x, "@");
+					x++;
+					move(y, x);
+					delch();
+					insch(' ');
+					getyx(stdscr, y, x);
+					x--;
+					move(y, x);
+					addch('@');
 					refresh();
 					move(y, x);
 					refresh();
@@ -126,7 +132,7 @@ int main (void)
 				x++;
 				move(y, x);
 				wall = inch();
-				if(wall == '=')
+				if(wall == '.')
 				{
 					getyx(stdscr, y, x);
 					x--;
@@ -135,7 +141,14 @@ int main (void)
 				}
 				else
 				{
-					mvprintw(y, x, "@");
+					x--;
+					move(y, x);
+					delch();
+					insch(' ');
+					getyx(stdscr, y, x);
+					x++;
+					move(y, x);
+					addch('@');
 					refresh();
 					move(y, x);
 					refresh();
