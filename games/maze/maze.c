@@ -58,7 +58,8 @@ int main (void)
 						clear();
 						getmaxyx(stdscr, y, x);
 						mvprintw(y/2, x/4, "Congratulations, you have completed level %i", level);
-						++level;
+						level++;
+						draw_maze(level);
 					}
 				break;
 			}
@@ -78,6 +79,7 @@ int main (void)
 				if(wall == ' ')
 				{
 					y--;
+					x--;
 					move(y, x);
 					delch();
 					insch(' ');
@@ -94,7 +96,8 @@ int main (void)
 					clear();
 					getmaxyx(stdscr, y, x);
 					mvprintw(y/2, x/4, "Congratulations, you have completed level %i", level);
-					++level;
+					draw_maze(level);
+					level++;
 				}
 			}
 			case KEY_LEFT :
@@ -110,7 +113,7 @@ int main (void)
 					move(y, x);
 					refresh();
 				}
-				else
+				if(wall == ' ')
 				{
 					x++;
 					move(y, x);
@@ -123,6 +126,14 @@ int main (void)
 					refresh();
 					move(y, x);
 					refresh();
+				}
+				if(wall == 'o')
+				{
+					clear();
+					getmaxyx(stdscr, y, x);
+					mvprintw(y/2, x/4, "Congratulations, you have completed level %i", level);
+					draw_maze(level);
+					level++;
 				}
 				break;
 			}
@@ -139,7 +150,7 @@ int main (void)
 					move(y, x);
 					refresh();
 				}
-				else
+				if(wall == ' ')
 				{
 					x--;
 					move(y, x);
@@ -152,6 +163,14 @@ int main (void)
 					refresh();
 					move(y, x);
 					refresh();
+				}
+				if(wall == 'o')
+				{
+					clear();
+					getmaxyx(stdscr, y, x);
+					mvprintw(y/2, x/4, "Congratulations, you have completed level %i", level);
+					draw_maze(level);
+					level++;
 				}
 				break;
 			}
