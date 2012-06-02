@@ -11,8 +11,8 @@ int main (void)
 	keypad(stdscr, TRUE);
 	raw();
 	draw_maze(level);
-	getmaxyx(stdscr, y, x);
-	mvprintw(y/2, x/2, "@");
+	getbegyx(stdscr, y, x);
+	mvprintw(y+1, x+1, "@");
 	refresh();
 	getyx(stdscr, y, x);
 	x--;
@@ -95,7 +95,14 @@ int main (void)
 				{
 					clear();
 					getmaxyx(stdscr, y, x);
-					mvprintw(y/2, x/4, "Congratulations, you have completed level %i", level);
+					mvprintw(y/2, x/4, "Congratulations, you have completed level %i\n", level);
+					mvprintw((y/2)+1, x/4, "Would you like to [c]ontinue or [q]uit?");
+					c = getch();
+					switch(c)
+					{
+						case 'c' : break;
+						case 'q' : endwin(); return 0; break;
+					}
 					draw_maze(level);
 					level++;
 				}
