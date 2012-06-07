@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <curses.h>
-#include <unistd.h>
 #include "levels.dat"
 #include "game_features.h"
 
@@ -12,8 +11,8 @@ int level_completed(l, y, x, c)
 	mvprintw((y/2)+1, x/4, "Would you like to [c]ontinue or [q]uit?");
 	switch(c = getch())
 	{
-		case 'c' : draw_maze(l); break; // Continue and render next level.
-		case 'q' : endwin(); return 0; break; // Close ncurses window
+		case 'c' : draw_maze(++l); break; // Continue and render next level.
+		case 'q' : endwin(); break; // Close ncurses window
 	}
 	return 0;
 }
