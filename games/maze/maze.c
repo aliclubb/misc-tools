@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <curses.h>
+#include <unistd.h>
 #include "levels.dat"
+#include "game_features.h"
 
 int level_completed(l, y, x, c)
 {
@@ -11,14 +13,14 @@ int level_completed(l, y, x, c)
 	switch(c = getch())
 	{
 		case 'c' : draw_maze(l); break; // Continue and render next level.
-		case 'q' : endwin(); break; // Close ncurses window
+		case 'q' : endwin(); return 0; break; // Close ncurses window
 	}
 	return 0;
 }
 
 int main (void)
 {
-	int level = 1, wall, c, y, x; // Set the level counter
+	int level = 1, have_key = 0, wall, c, y, x; // Set the level counter
 	initscr();
 	noecho();
 	keypad(stdscr, TRUE); // Catch all user input
@@ -39,6 +41,24 @@ int main (void)
 				switch(wall)
 				{
 					case '.' : move(++y, x); break;
+					case '+' :
+					{
+						if(have_key == 1)
+						{
+							addch(' ');
+							mvprintw(22, 0, "                                                                         ");
+							mvprintw(22, 0, "The rusty key creaked in the lock... The key snapped! The door opened....");
+							have_key--;
+							move(++y, x);
+						}
+						else
+						{
+							mvprintw(22, 0, "                                                                         ");
+							mvprintw(22, 0, "This door appears to be locked.... You need a key.");
+							move(++y, x);
+						}
+						break;
+					}
 					case ' ' :
 					{
 						move(++y, x);
@@ -49,6 +69,18 @@ int main (void)
 						break;
 					}
 					case 'o' : level_completed(level++); break;
+					case 'E' :
+					{
+						have_key++;
+						mvprintw(22, 0, "                                                                         ");
+						mvprintw(22, 0, "You picked up a rusty key....");
+						move(++y, x);
+						addch(' ');
+						move(--y, x);
+						addch('@');
+						move(y, x);
+						break;
+					}
 				}
 				refresh();
 				break;
@@ -60,6 +92,24 @@ int main (void)
 				switch(wall)
 				{
 					case '.' : move(--y, x); break;
+					case '+' :
+					{
+						if(have_key == 1)
+						{
+							addch(' ');
+							mvprintw(22, 0, "                                                                         ");
+							mvprintw(22, 0, "The rusty key creaked in the lock... The key snapped! The door opened....");
+							have_key--;
+							move(--y, x);
+						}
+						else
+						{
+							mvprintw(22, 0, "                                                                         ");
+							mvprintw(22, 0, "This door appears to be locked.... You need a key.");
+							move(--y, x);
+						}
+						break;
+					}
 					case ' ' :
 					{
 						move(--y, x);
@@ -70,6 +120,18 @@ int main (void)
 						break;
 					}
 					case 'o' : level_completed(level++); break;
+					case 'E' :
+					{
+						have_key++;
+						mvprintw(22, 0, "                                                                         ");
+						mvprintw(22, 0, "You picked up a rusty key....");
+						move(--y, x);
+						addch(' ');
+						move(++y, x);
+						addch('@');
+						move(y, x);
+						break;
+					}
 				}
 				refresh();
 				break;
@@ -81,6 +143,24 @@ int main (void)
 				switch(wall)
 				{
 					case '.' : move(y, ++x); break;
+					case '+' :
+					{
+						if(have_key == 1)
+						{
+							addch(' ');
+							mvprintw(22, 0, "                                                                         ");
+							mvprintw(22, 0, "The rusty key creaked in the lock... The key snapped! The door opened....");
+							have_key--;
+							move(y, ++x);
+						}
+						else
+						{
+							mvprintw(22, 0, "                                                                         ");
+							mvprintw(22, 0, "This door appears to be locked.... You need a key.");
+							move(y, ++x);
+						}
+						break;
+					}
 					case ' ' :
 					{
 						move(y, ++x);
@@ -91,6 +171,18 @@ int main (void)
 						break;
 					}
 					case 'o' : level_completed(level++); break;
+					case 'E' :
+					{
+						have_key++;
+						mvprintw(22, 0, "                                                                         ");
+						mvprintw(22, 0, "You picked up a rusty key....");
+						move(y, ++x);
+						addch(' ');
+						move(y, --x);
+						addch('@');
+						move(y, x);
+						break;
+					}
 				}
 				refresh();
 				break;
@@ -102,6 +194,24 @@ int main (void)
 				switch(wall)
 				{
 					case '.' : move(y, --x); break;
+					case '+' :
+					{
+						if(have_key == 1)
+						{
+							addch(' ');
+							mvprintw(22, 0, "                                                                         ");
+							mvprintw(22, 0, "The rusty key creaked in the lock... The key snapped! The door opened....");
+							have_key--;
+							move(y, --x);
+						}
+						else
+						{
+							mvprintw(22, 0, "                                                                         ");
+							mvprintw(22, 0, "This door appears to be locked.... You need a key.");
+							move(y, --x);
+						}
+						break;
+					}
 					case ' ' :
 					{
 						move(y, --x);
@@ -112,6 +222,18 @@ int main (void)
 						break;
 					}
 					case 'o' : level_completed(level++); break;
+					case 'E' :
+					{
+						have_key++;
+						mvprintw(22, 0, "                                                                         ");
+						mvprintw(22, 0, "You picked up a rusty key....");
+						move(y, --x);
+						addch(' ');
+						move(y, ++x);
+						addch('@');
+						move(y, x);
+						break;
+					}
 				}
 				refresh();
 				break;

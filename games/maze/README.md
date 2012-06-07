@@ -8,4 +8,4 @@ BUGS
 
 Yes, believe it or not some of my software has bugs -_-
 So here's a list of them
-	NONE AT THE MOMENT!
+	Pressing 'q' when you have completed the level does not cause the game to quit, instead making the game 'hang'.
