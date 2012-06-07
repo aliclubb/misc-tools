@@ -30,15 +30,17 @@ int main (void)
 				y--;
 				move(y, x);
 				wall = inch();
-				if(wall == '.')
+				switch(wall)
 				{
-					getyx(stdscr, y, x);
-					y++;
-					move(y, x);
-					refresh();
-				}
-				else 
-					if(wall == ' ')
+					case '.' :
+					{
+						getyx(stdscr, y, x);
+						y++;
+						move(y, x);
+						refresh();
+						break;	
+					}
+					case ' ' :
 					{
 						y++;
 						move(y, x);
@@ -51,16 +53,26 @@ int main (void)
 						refresh();
 						move(y, x);
 						refresh();
+						break;
 					}
-				else
-					if(wall == 'o')
+					case 'o' :
 					{
 						clear();
 						getmaxyx(stdscr, y, x);
-						mvprintw(y/2, x/4, "Congratulations, you have completed level %i", level);
-						level++;
+						mvprintw(y/2, x/4, "Congratulations, you have completed level %i\n", level);
+						mvprintw((y/2)+1, x/4, "Would you like to [c]ontinue or [q]uit?");
+						c = getch();
+						switch(c)
+						{
+							case 'c' : break;
+							case 'q' : endwin(); return 0; break;
+						}
 						draw_maze(level);
+						level++;
+						break;
 					}
+					
+				}
 				break;
 			}
 			case KEY_DOWN :
@@ -69,43 +81,49 @@ int main (void)
 				y++;
 				move(y, x);
 				wall = inch();
-				if(wall == '.')
+				switch(wall)
 				{
-					getyx(stdscr, y, x);
-					y--;
-					move(y, x);
-					refresh();
-				}
-				if(wall == ' ')
-				{
-					y--;
-					x--;
-					move(y, x);
-					delch();
-					insch(' ');
-					refresh();
-					y++;
-					move(y, x);
-					addch('@');
-					refresh();
-					move(y, x);
-					refresh();
-				}
-				if(wall == 'o')
-				{
-					clear();
-					getmaxyx(stdscr, y, x);
-					mvprintw(y/2, x/4, "Congratulations, you have completed level %i\n", level);
-					mvprintw((y/2)+1, x/4, "Would you like to [c]ontinue or [q]uit?");
-					c = getch();
-					switch(c)
+					case '.' :
 					{
-						case 'c' : break;
-						case 'q' : endwin(); return 0; break;
+						getyx(stdscr, y, x);
+						y--;
+						move(y, x);
+						refresh();
+						break;
 					}
-					draw_maze(level);
-					level++;
+					case ' ' :
+					{
+						y--;
+						move(y, x);
+						delch();
+						insch(' ');
+						refresh();
+						y++;
+						move(y, x);
+						addch('@');
+						refresh();
+						move(y, x);
+						refresh();
+						break;
+					}
+					case 'o' :
+					{
+						clear();
+						getmaxyx(stdscr, y, x);
+						mvprintw(y/2, x/4, "Congratulations, you have completed level %i\n", level);
+						mvprintw((y/2)+1, x/4, "Would you like to [c]ontinue or [q]uit?");
+						c = getch();
+						switch(c)
+						{
+							case 'c' : break;
+							case 'q' : endwin(); return 0; break;
+						}
+						draw_maze(level);
+						level++;
+						break;
+					}
 				}
+				break;
 			}
 			case KEY_LEFT :
 			{
@@ -113,26 +131,31 @@ int main (void)
 				x--;
 				move(y, x);
 				wall = inch();
-				if(wall == '.')
+				switch(wall)
 				{
-					getyx(stdscr, y, x);
-					x++;
-					move(y, x);
-					refresh();
-				}
-				if(wall == ' ')
-				{
-					x++;
-					move(y, x);
-					delch();
-					insch(' ');
-					getyx(stdscr, y, x);
-					x--;
-					move(y, x);
-					addch('@');
-					refresh();
-					move(y, x);
-					refresh();
+					case '.' :
+					{
+						getyx(stdscr, y, x);
+						x++;
+						move(y, x);
+						refresh();
+						break;
+					}
+					case ' ' :
+					{
+						x++;
+						move(y, x);
+						delch();
+						insch(' ');
+						getyx(stdscr, y, x);
+						x--;
+						move(y, x);
+						addch('@');
+						refresh();
+						move(y, x);
+						refresh();
+					}
+					
 				}
 				if(wall == 'o')
 				{
