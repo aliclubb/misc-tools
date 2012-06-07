@@ -11,7 +11,7 @@ ifeq ($(OS), Darwin)
 	$(CC) $(CFLAGS) -o bin/ascii2char ascii-tools/ascii2char.c
 	$(CC) $(CFLAGS) -o bin/char2ascii ascii-tools/char2ascii.c
 	$(CC) $(CFLAGS) -o bin/ascii-tools ascii-tools/ascii-tools.c
-	$(CC) $(CFLAGS) -o bin/maze games/maze/maze.c -lncurses
+	$(CC) $(CFLAGS) -o bin/maze games/maze/maze.c games/maze/game_features.c -lncurses
 endif
 ifeq ($(OS), Linux)
 	$(CC) $(CFLAGS) -o bin/rot13 rot-tools/rot13.c
