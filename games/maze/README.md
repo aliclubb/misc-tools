@@ -1,7 +1,7 @@
 Maze
 ====
 
-This is a maze game which I knocked up the alpha for in a few hours.
+A small adventure style maze game I made.
 
 BUGS
 ====
