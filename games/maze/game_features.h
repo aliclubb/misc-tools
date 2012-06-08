@@ -1,1 +1,3 @@
-// void door_tests(void); UNUSED AT THE MOMENT
+void level_completed(int);
+
+void unlock(void);
