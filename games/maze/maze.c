@@ -1,27 +1,18 @@
 #include <stdio.h>
 #include <curses.h>
-#include "levels.dat"
 #include "game_features.h"
-
-void level_completed(int level)
-{
-	int y, x;
-	clear();
-	getmaxyx(stdscr, y, x);
-	mvprintw(y/2, x/4, "Congratulations, you have completed level %i\n", level);
-	mvprintw((y/2)+1, x/4, "Would you like to [c]ontinue or [q]uit?");
-}
+#include "levels.dat"
 
 int main (void)
 {
 	int level = 1, have_key = 0, wall, c, y, x; // Set the level counter
+	x = y = 1;
 	initscr();
 	noecho();
 	keypad(stdscr, TRUE); // Catch all user input
 	raw();
 	draw_maze(level); // Draw the maze
-	getbegyx(stdscr, y, x);
-	mvprintw(++y, ++x, "@");
+	mvprintw(1, 1, "@");
 	move(y, x); // Move the cursor so that it is on top of the character.
 	refresh();
 	while ((c = getch()) != 3) // Get user input while it is not equal to ^C
@@ -38,10 +29,7 @@ int main (void)
 					{
 						if(have_key == 1)
 						{
-							addch(' ');
-							move(22, 0);
-							deleteln();
-							mvprintw(22, 0, "The rusty key creaked in the lock... The key snapped! The door opened....");
+							unlock();
 							have_key--;
 							move(++y, x);
 						}
@@ -100,10 +88,7 @@ int main (void)
 					{
 						if(have_key == 1)
 						{
-							addch(' ');
-							move(22, 0);
-							deleteln();
-							mvprintw(22, 0, "The rusty key creaked in the lock... The key snapped! The door opened....");
+							unlock();
 							have_key--;
 							move(--y, x);
 						}
@@ -162,10 +147,7 @@ int main (void)
 					{
 						if(have_key == 1)
 						{
-							addch(' ');
-							move(22, 0);
-							deleteln();
-							mvprintw(22, 0, "The rusty key creaked in the lock... The key snapped! The door opened....");
+							unlock();
 							have_key--;
 							move(y, ++x);
 						}
@@ -224,10 +206,7 @@ int main (void)
 					{
 						if(have_key == 1)
 						{
-							addch(' ');
-							move(22, 0);
-							deleteln();
-							mvprintw(22, 0, "The rusty key creaked in the lock... The key snapped! The door opened....");
+							unlock();
 							have_key--;
 							move(y, --x);
 						}
