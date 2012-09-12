@@ -12,6 +12,7 @@ ifeq ($(OS), Darwin)
 	$(CC) $(CFLAGS) -o bin/char2ascii ascii-tools/char2ascii.c
 	$(CC) $(CFLAGS) -o bin/ascii-tools ascii-tools/ascii-tools.c
 	$(CC) $(CFLAGS) -o bin/convertendian binary-tools/convertendian.c binary-tools/strrev.c
+	$(CC) $(CFLAGS) -o bin/bin2num binary-tools/bin2num.c
 	$(CC) $(CFLAGS) -o bin/maze games/maze/maze.c games/maze/game_features.c -lncurses
 endif
 ifeq ($(OS), Linux)
@@ -21,6 +22,8 @@ ifeq ($(OS), Linux)
 	$(CC) $(CFLAGS) -o bin/ascii2char ascii-tools/ascii2char.c
 	$(CC) $(CFLAGS) -o bin/char2ascii ascii-tools/char2ascii.c
 	$(CC) $(CFLAGS) -o bin/ascii-tools ascii-tools/ascii-tools.c
+	$(CC) $(CFLAGS) -o bin/convertendian binary-tools/convertendian.c binary-tools/strrev.c
+	$(CC) $(CFLAGS) -o bin/bin2num binary-tools/bin2num.c
 	$(CC) $(CFLAGS) -o bin/maze games/maze/maze.c -lncurses
 endif
 ifeq ($(OS), CYGWIN_NT-5.1)
@@ -30,6 +33,8 @@ ifeq ($(OS), CYGWIN_NT-5.1)
 	$(CC) $(CFLAGS) -o bin/ascii2char ascii-tools/ascii2char.c
 	$(CC) $(CFLAGS) -o bin/char2ascii ascii-tools/char2ascii.c
 	$(CC) $(CFLAGS) -o bin/ascii-tools ascii-tools/ascii-tools.c
+	$(CC) $(CFLAGS) -o bin/convertendian binary-tools/convertendian.c binary-tools/strrev.c
+	$(CC) $(CFLAGS) -o bin/bin2num binary-tools/bin2num.c
 	$(CC) $(CFLAGS) -o bin/maze games/maze/maze.c -lncurses
 endif
 install:
@@ -39,10 +44,13 @@ install:
 	cp bin/ascii2char /usr/local/bin/ascii2char
 	cp bin/char2ascii /usr/local/bin/char2ascii
 	cp bin/ascii-tools /usr/local/bin/ascii-tools
+	cp bin/convertendian /usr/local/bin/convertendian
+	cp bin/bin2num /usr/loacl/bin/bin2num
 	cp bin/maze /usr/local/bin/maze
 clean:
 	rm -f ascii-tools/*.o
 	rm -f rot-tools/*.o
+	rm -f binary-tools/*.o
 	rm -r bin/
 uninstall:
 	rm -f /usr/local/bin/rot13
@@ -51,4 +59,6 @@ uninstall:
 	rm -f /usr/local/bin/ascii2char
 	rm -f /usr/local/bin/char2ascii
 	rm -f /usr/local/bin/ascii-tools
+	rm -f /usr/local/bin/convertendian
+	rm -f /usr/local/bin/bin2num
 	rm -f /usr/local/bin/maze
